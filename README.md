@@ -8,6 +8,11 @@ TODO: Guide users through getting your code up and running on their own system. 
 3.	Latest releases
 4.	API references
 
+# API Documentation Portal
+```
+http://localhost:8085/swagger-ui/index.html
+```
+
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
 

@@ -3,6 +3,10 @@ package es.uniovi.avib.morphing.projections.backend.security.service;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.admin.client.resource.UsersResource;
+import org.keycloak.representations.idm.CredentialRepresentation;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -11,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import es.uniovi.avib.morphing.projections.backend.security.configuration.KeycloakAdminApiConfig;
 import es.uniovi.avib.morphing.projections.backend.security.configuration.KeycloakConfig;
 import es.uniovi.avib.morphing.projections.backend.security.dto.LoginRequest;
 import es.uniovi.avib.morphing.projections.backend.security.dto.LoginResponse;
@@ -72,4 +78,21 @@ public class LoginService {
         
         return ResponseEntity.status(200).body(logoutResponse.getBody());
     }
+    
+    public void resetPassword(String realm, String userId, String resetPasswordRequest) throws Exception {
+        log.info("Executing resetPassword from service");
+                        
+        RealmResource realmResource = KeycloakAdminApiConfig.getInstance().realm(realm);
+		UsersResource usersResource = realmResource.users();
+
+		UserResource userResource = usersResource.get(userId);
+		
+	    // set user password
+	    CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+	    credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+	    credentialRepresentation.setTemporary(false);
+	    credentialRepresentation.setValue(resetPasswordRequest);
+	    	    
+	    userResource.resetPassword(credentialRepresentation);	    
+    }    
 }

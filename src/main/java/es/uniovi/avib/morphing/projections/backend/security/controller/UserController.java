@@ -11,15 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.resource.UserResource;
-import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.ClientRepresentation;
-import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.MappingsRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
-import es.uniovi.avib.morphing.projections.backend.security.configuration.KeycloakAdminApiConfig;
 import es.uniovi.avib.morphing.projections.backend.security.dto.LoginRequest;
 import es.uniovi.avib.morphing.projections.backend.security.dto.LoginResponse;
 import es.uniovi.avib.morphing.projections.backend.security.dto.RefreshTokenRequest;
@@ -56,19 +51,8 @@ public class UserController {
     @RequestMapping(value = "/realms/{realm}/users/{userId}/resetPassword", method = RequestMethod.POST)
     public void resetPassword(@PathVariable("realm") String realm, @PathVariable("userId") String userId, @RequestBody String resetPasswordRequest) throws Exception {
         log.info("Executing resetPassword from controller");
-                        
-        RealmResource realmResource = KeycloakAdminApiConfig.getInstance().realm(realm);
-		UsersResource usersResource = realmResource.users();
-
-		UserResource userResource = usersResource.get(userId);
-		
-	    // set user password
-	    CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
-	    credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
-	    credentialRepresentation.setTemporary(false);
-	    credentialRepresentation.setValue(resetPasswordRequest);
-	    	    
-	    userResource.resetPassword(credentialRepresentation);	    
+                   
+        loginService.resetPassword(realm, userId, resetPasswordRequest);            
     }
     
     @RequestMapping(value = "/realms/{realm}/clients/{clientId}/logout", method = RequestMethod.POST)
