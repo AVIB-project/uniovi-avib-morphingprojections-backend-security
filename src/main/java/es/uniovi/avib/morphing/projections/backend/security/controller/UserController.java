@@ -37,7 +37,7 @@ public class UserController {
 
     @RequestMapping(value = "/realms/{realm}/clients/{clientId}/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> login(@PathVariable("realm") String realm, @PathVariable("clientId") String clientId, @RequestBody LoginRequest loginRequest) throws Exception {
-        log.info("Executing Login");
+        log.info("Executing login from controller");
                         
         ResponseEntity<LoginResponse> response = loginService.login(realm, clientId, loginRequest);
 
@@ -46,7 +46,7 @@ public class UserController {
     
     @RequestMapping(value = "/realms/{realm}/clients/{clientId}/refresh", method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> refreshToken(@PathVariable("realm") String realm, @PathVariable("clientId") String clientId, @RequestBody RefreshTokenRequest refreshTokenRequest) throws Exception {
-        log.info("Executing Refresh Token");
+        log.info("Executing refreshToken from controller");
                         
         ResponseEntity<LoginResponse> response = loginService.refreshToken(realm, clientId, refreshTokenRequest);
 
@@ -55,7 +55,7 @@ public class UserController {
     
     @RequestMapping(value = "/realms/{realm}/users/{userId}/resetPassword", method = RequestMethod.POST)
     public void resetPassword(@PathVariable("realm") String realm, @PathVariable("userId") String userId, @RequestBody String resetPasswordRequest) throws Exception {
-        log.info("Executing Reset Password");
+        log.info("Executing resetPassword from controller");
                         
         RealmResource realmResource = KeycloakAdminApiConfig.getInstance().realm(realm);
 		UsersResource usersResource = realmResource.users();
@@ -82,49 +82,49 @@ public class UserController {
     
 	@RequestMapping(value = "/realms/{realm}/clients", method = RequestMethod.GET)
     public List<ClientRepresentation> getClients(@PathVariable("realm") String realm) throws Exception {
-        log.info("Executing getClients");
+        log.info("Executing getClients from controller");
             
         return realmService.getClients(realm);
     }
 		 
 	@RequestMapping(value = "/realms/{realm}/users", method = RequestMethod.GET)
     public List<UserRepresentation> getUsers(@PathVariable("realm") String realm) throws Exception {
-        log.info("Executing getUsers");
+        log.info("Executing getUsers from controller");
               
         return realmService.getUsers(realm);   	    	
     }
 	
 	@RequestMapping(value = "/realms/{realm}/users/{userId}", method = RequestMethod.GET)
     public UserRepresentation getUserById(@PathVariable("realm") String realm, @PathVariable("userId") String userId) throws Exception {
-        log.info("Executing getUserById");
+        log.info("Executing getUserById from controller");
                 
         return realmService.getUserById(realm, userId);    
     }
 	
 	@RequestMapping(value = "/realms/{realm}/users/{userId}/roles", method = RequestMethod.GET)
     public MappingsRepresentation getRoles(@PathVariable("realm") String realm, @PathVariable("userId") String userId) throws Exception {
-        log.info("Executing getRoles");
+        log.info("Executing getRoles from controller");
                  
         return realmService.getRoles(realm, userId);
     }
 	
 	@RequestMapping(value = "/realms/{realm}/users", method = RequestMethod.POST)
 	public String createUser(@PathVariable("realm") String realm, @RequestBody UserRequest userRequest) {
-		log.info("Executing createUser");
+		log.info("Executing createUser from controller");
 		
 		return realmService.createUser(realm, userRequest);	    
 	}
 
 	@RequestMapping(value = "/{realm}/users/{userId}", method = RequestMethod.PUT)
 	public void updateUser(@PathVariable("realm") String realm, @PathVariable("userId") String userId, @RequestBody UserRequest userRequest) {
-		log.info("Executing Update User");
+		log.info("Executing updateUser from controller");
 		
 		realmService.updateUser(realm, userId, userRequest);	  		
 	}
 	
 	@RequestMapping(value = "/{realm}/users/{userId}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable("realm") String realm, @PathVariable("userId") String userId) {
-		log.info("Executing dDelete User");
+		log.info("Executing deleteUser from controller");
 		
 		return realmService.deleteUser(realm, userId);
 	}

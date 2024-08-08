@@ -7,6 +7,11 @@ management:
       probes:
         enabled: true
 
+keycloak:
+  server-url: http://localhost:8088
+  admin-username: user
+  admin-password: vnBSHFD0lT
+  
 ---
 server:
   port: 8084
@@ -16,7 +21,12 @@ management:
     health:     
       probes:
         enabled: true
-          
+
+keycloak:
+  server-url: http://avib-keycloak:8080
+  admin-username: user
+  admin-password: vnBSHFD0lT
+            
 spring:
   config:
     activate:

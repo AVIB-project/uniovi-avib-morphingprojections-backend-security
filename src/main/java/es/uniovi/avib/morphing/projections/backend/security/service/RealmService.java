@@ -28,7 +28,7 @@ import es.uniovi.avib.morphing.projections.backend.security.dto.UserRequest;
 @Service
 public class RealmService {
 	public List<ClientRepresentation> getClients(String realm) throws Exception {
-		log.info("Executing getClients");
+		log.info("Executing getClients from service");
                     	
     	ClientsResource clientsResource = KeycloakAdminApiConfig.getInstance().realm(realm).clients();
     	
@@ -36,7 +36,7 @@ public class RealmService {
     }	
 	
     public List<UserRepresentation> getUsers(String realm) throws Exception {
-    	log.info("Executing getUsers");
+    	log.info("Executing getUsers from service");
                 
     	UsersResource usersResource = KeycloakAdminApiConfig.getInstance().realm(realm).users();    	
     	
@@ -44,7 +44,7 @@ public class RealmService {
     }
     
     public UserRepresentation getUserById(String realm, String userId) throws Exception {
-    	log.info("Executing getUserById");
+    	log.info("Executing getUserById from service");
                 
     	UsersResource usersResource = KeycloakAdminApiConfig.getInstance().realm(realm).users();
     	    	    	    
@@ -52,7 +52,7 @@ public class RealmService {
     } 
     
     public MappingsRepresentation getRoles(String realm, String id) throws Exception {
-    	log.info("Executing Get Roles");
+    	log.info("Executing getRoles from service");
                     	
     	UsersResource usersResource = KeycloakAdminApiConfig.getInstance().realm(realm).users();
 
@@ -60,7 +60,7 @@ public class RealmService {
     }   
     
 	public String createUser(String realm, UserRequest userRequest) {
-		log.info("Executing createUser");
+		log.info("Executing createUser from service");
 		
 		RealmResource realmResource = KeycloakAdminApiConfig.getInstance().realm(realm);
 		UsersResource usersResource = realmResource.users();
@@ -141,7 +141,7 @@ public class RealmService {
 	}
 	
 	public void updateUser(String realm, String userId, UserRequest userRequest) {
-		log.info("Executing Update User");
+		log.info("Executing updateUser from service");
 		
 		UsersResource usersResource = KeycloakAdminApiConfig.getInstance().realm(realm).users();
 			 
