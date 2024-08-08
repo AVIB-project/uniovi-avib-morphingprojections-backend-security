@@ -55,11 +55,11 @@ public class UserController {
         return response;
     }
     
-    @RequestMapping(value = "/realms/{realm}/refresh", method = RequestMethod.POST)
-    public ResponseEntity<LoginResponse> refresh(@PathVariable("realm") String realm, @RequestBody RefreshTokenRequest refreshTokenRequest) throws Exception {
-        log.info("Executing Refresh");
+    @RequestMapping(value = "/realms/{realm}/clients/{clientId}/refresh", method = RequestMethod.POST)
+    public ResponseEntity<LoginResponse> refreshToken(@PathVariable("realm") String realm, @PathVariable("clientId") String clientId, @RequestBody RefreshTokenRequest refreshTokenRequest) throws Exception {
+        log.info("Executing Refresh Token");
                         
-        ResponseEntity<LoginResponse> response = loginService.refreshToken(realm, refreshTokenRequest);
+        ResponseEntity<LoginResponse> response = loginService.refreshToken(realm, clientId, refreshTokenRequest);
 
         return response;
     }
@@ -82,11 +82,11 @@ public class UserController {
 	    userResource.resetPassword(credentialRepresentation);	    
     }
     
-    @RequestMapping(value = "/realms/{realm}/logout", method = RequestMethod.POST)
-    public ResponseEntity<String> logout(@PathVariable("realm") String realm, @RequestBody String refreshToken) throws Exception {
+    @RequestMapping(value = "/realms/{realm}/clients/{clientId}/logout", method = RequestMethod.POST)
+    public ResponseEntity<String> logout(@PathVariable("realm") String realm, @PathVariable("clientId") String clientId, @RequestBody RefreshTokenRequest refreshTokenRequest) throws Exception {
         log.info("Executing Logout");
                         
-        ResponseEntity<String> response = loginService.logout(realm, refreshToken);
+        ResponseEntity<String> response = loginService.logout(realm, clientId, refreshTokenRequest.getRefreshToken());
 
         return response;
     }

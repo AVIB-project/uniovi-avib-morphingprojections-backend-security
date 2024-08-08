@@ -22,7 +22,6 @@ public class LoginService {
     Logger logger = LoggerFactory.getLogger(LoginService.class);
     
     final static String serverUrl = "http://localhost:8088";
-    final static String clientId = "admin-api";
            
     RestTemplate restTemplate;
     
@@ -46,7 +45,7 @@ public class LoginService {
         return ResponseEntity.status(200).body(loginResponse.getBody());
     }
     
-    public ResponseEntity<LoginResponse> refreshToken(String realm, RefreshTokenRequest request)  {    	
+    public ResponseEntity<LoginResponse> refreshToken(String realm, String clientId,  RefreshTokenRequest request)  {    	
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -61,7 +60,7 @@ public class LoginService {
         return ResponseEntity.status(200).body(loginResponse.getBody());
     }
         
-    public ResponseEntity<String> logout(String realm, String refreshToken)  {    	
+    public ResponseEntity<String> logout(String realm, String clientId, String refreshToken)  {    	
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
