@@ -7,13 +7,6 @@ management:
       probes:
         enabled: true
 
-keycloak:
-  realm: avib
-  resource: admin-api
-  auth-server-url: http://localhost:8080/auth
-  ssl-required: external
-  use-resource-role-mappings: true
-
 ---
 server:
   port: 8084
@@ -27,11 +20,4 @@ management:
 spring:
   config:
     activate:
-      on-profile: avib
-      
-keycloak:
-  realm: avib
-  resource: admin-api
-  auth-server-url: http://avib-keycloak:8080/auth
-  ssl-required: external
-  use-resource-role-mappings: true         
+      on-profile: avib     
