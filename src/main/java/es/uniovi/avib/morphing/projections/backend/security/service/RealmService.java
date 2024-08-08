@@ -72,6 +72,7 @@ public class RealmService {
 	    user.setEmail(userRequest.getEmail());
 	    user.setCredentials(new ArrayList<>());
 	    user.setAttributes(userRequest.getAttributes());
+	    user.setEmailVerified(true);
 	    user.setEnabled(userRequest.isEnabled());
 	    	           
 	    // create user
