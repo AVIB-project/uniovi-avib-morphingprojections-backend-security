@@ -99,14 +99,14 @@ public class UserController {
 		return realmService.createUser(realm, userRequest);	    
 	}
 
-	@RequestMapping(value = "/{realm}/users/{userId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/realms/{realm}/users/{userId}", method = RequestMethod.PUT)
 	public void updateUser(@PathVariable("realm") String realm, @PathVariable("userId") String userId, @RequestBody UserRequest userRequest) {
 		log.info("Executing updateUser from controller");
 		
 		realmService.updateUser(realm, userId, userRequest);	  		
 	}
 	
-	@RequestMapping(value = "/{realm}/users/{userId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/realms/{realm}/users/{userId}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable("realm") String realm, @PathVariable("userId") String userId) {
 		log.info("Executing deleteUser from controller");
 		

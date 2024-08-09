@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class UserRequest {
-	private boolean enabled;
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -17,4 +16,5 @@ public class UserRequest {
 	private List<String> realmRoles;
 	private Map<String, List<String>> clientRoles;
 	private Map<String, List<String>> attributes;
+	private boolean enabled;
 }
