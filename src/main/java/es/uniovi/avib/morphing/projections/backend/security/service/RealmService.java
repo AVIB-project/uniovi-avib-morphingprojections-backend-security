@@ -67,8 +67,8 @@ public class RealmService {
 		
 	   	UserRepresentation user = new UserRepresentation();
 	    user.setUsername(userRequest.getUsername());
-	    user.setFirstName(userRequest.getFirstName());
-	    user.setLastName(userRequest.getLastName());
+	    user.setFirstName(userRequest.getFirstname());
+	    user.setLastName(userRequest.getLastname());
 	    user.setEmail(userRequest.getEmail());
 	    user.setCredentials(new ArrayList<>());
 	    user.setAttributes(userRequest.getAttributes());
@@ -149,11 +149,12 @@ public class RealmService {
 		UserResource userResource = usersResource.get(userId);
 		
 		UserRepresentation user = new UserRepresentation();
-	    user.setEnabled(userRequest.isEnabled());
+		user.setId(userId);
 	    user.setUsername(userRequest.getUsername());
-	    user.setFirstName(userRequest.getFirstName());
-	    user.setLastName(userRequest.getLastName());
+	    user.setFirstName(userRequest.getFirstname());
+	    user.setLastName(userRequest.getLastname());
 	    user.setEmail(userRequest.getEmail());
+	    user.setEnabled(userRequest.isEnabled());
 	    
 	    if (userRequest.getAttributes() != null) {
 		    for (Entry<String, List<String>> entry : userRequest.getAttributes().entrySet()) {	    	

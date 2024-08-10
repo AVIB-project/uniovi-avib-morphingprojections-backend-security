@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 public class UserRequest {
 	private String username;
-	private String firstName;
-	private String lastName;
+	private String firstname;
+	private String lastname;
 	private String email;
 	private String address;
 	private String password;
