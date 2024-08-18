@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -27,6 +28,8 @@ import es.uniovi.avib.morphing.projections.backend.security.dto.UserRequest;
 @Slf4j
 @Service
 public class RealmService {
+	List<String> ROLES = Arrays.asList("ADMIN", "USER", "GUEST");
+	
 	public List<ClientRepresentation> getClients(String realm) throws Exception {
 		log.info("Executing getClients from service");
                     	
@@ -161,6 +164,34 @@ public class RealmService {
 		    	user.setAttributes(Collections.singletonMap(entry.getKey(), entry.getValue()));
 		    }
 	    }
+	    
+	    // update Realm Roles to user
+	    if (userRequest.getRealmRoles() != null) {		    
+		    // get all realm roles to be removed
+		    List<RoleRepresentation> roleRealmRemoveRequest = new ArrayList<RoleRepresentation>();		    
+		    for (RoleRepresentation roleRepresentation : userResource.roles().getAll().getRealmMappings()) {
+		      if (ROLES.contains(roleRepresentation.getName())) {
+		    	  roleRealmRemoveRequest.add(roleRepresentation);		          		         
+		       }			    
+		    }
+		    		
+		    userResource.roles().realmLevel().remove(roleRealmRemoveRequest);
+		    
+		    List<RoleRepresentation> roleRealmRepresentationAvailable = userResource.roles().realmLevel().listAvailable();
+		    		    
+		    // set realm roles available to user
+		    List<RoleRepresentation> roleRealmAddRequest = new ArrayList<RoleRepresentation>();		    
+		    for (String userRole : userRequest.getRealmRoles()) {
+			    for (RoleRepresentation roleRepresentation : roleRealmRepresentationAvailable) {
+			      if (roleRepresentation.getName().equals(userRole)) {
+			    	  roleRealmAddRequest.add(roleRepresentation);		          		         
+			       }
+			    }
+		    }	
+		    
+		    // add new realm roles to user
+		    userResource.roles().realmLevel().add(roleRealmAddRequest);		    
+	    }	    
 	    
 	    userResource.update(user);
 	}
