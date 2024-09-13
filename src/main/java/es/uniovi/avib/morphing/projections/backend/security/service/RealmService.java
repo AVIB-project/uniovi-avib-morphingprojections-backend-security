@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.keycloak.admin.client.CreatedResponseUtil;
@@ -204,5 +205,19 @@ public class RealmService {
 	    Response response = usersResource.delete(id);
 	    	 
 	    return response.getStatus();
-	}	
+	}
+	
+    public String getClientUserSessions(String realm) throws Exception {
+    	log.info("Executing getClientUserSessions from realm: {} and client: portal-cli", realm);
+    	  
+    	String clientSessionActive = "0";
+    	    	    	 
+    	for (Map<String, String> clientSessionStat : KeycloakAdminApiConfig.getInstance().realm(realm).getClientSessionStats()) {
+    		if (clientSessionStat.get("clientId").equals("portal-cli")) {
+    			clientSessionActive =clientSessionStat.get("active");
+    		}	
+    	}
+    	
+    	return clientSessionActive;
+    } 
 }

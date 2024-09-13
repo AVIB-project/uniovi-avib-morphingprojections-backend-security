@@ -112,4 +112,11 @@ public class UserController {
 		
 		return realmService.deleteUser(realm, userId);
 	}
+	
+	@RequestMapping(value = "/realms/{realm}/sessions", method = RequestMethod.GET)
+	public String getUserSessions(@PathVariable("realm") String realm) throws Exception {
+		log.info("Executing getUserSessions from controller");
+		
+		return realmService.getClientUserSessions(realm);
+	}	
 }
