@@ -9,8 +9,8 @@ management:
 
 keycloak:
   server-url: http://localhost:8088
-  admin-username: user
-  admin-password: vnBSHFD0lT
+  admin-username: admin
+  admin-password: password
   
 ---
 server:
