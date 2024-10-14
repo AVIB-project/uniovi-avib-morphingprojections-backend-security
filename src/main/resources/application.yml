@@ -22,12 +22,12 @@ management:
       probes:
         enabled: true
 
-keycloak:
-  server-url: http://avib-keycloak:8080
-  admin-username: user
-  admin-password: vnBSHFD0lT
-            
 spring:
   config:
     activate:
-      on-profile: avib     
+      on-profile: avib  
+
+keycloak:
+  server-url: http://gsdpi-keycloak:80
+  admin-username: admin
+  admin-password: password   
