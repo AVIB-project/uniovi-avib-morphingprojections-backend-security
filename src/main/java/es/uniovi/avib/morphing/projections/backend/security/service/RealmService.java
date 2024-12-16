@@ -22,6 +22,7 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.MappingsRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.keycloak.representations.idm.UserSessionRepresentation;
 
 import es.uniovi.avib.morphing.projections.backend.security.configuration.KeycloakAdminApiConfig;
 import es.uniovi.avib.morphing.projections.backend.security.dto.UserRequest;
@@ -207,17 +208,17 @@ public class RealmService {
 	    return response.getStatus();
 	}
 	
-    public String getClientUserSessions(String realm) throws Exception {
+    public List<UserSessionRepresentation> getClientUserSessions(String realm) throws Exception {
     	log.info("Executing getClientUserSessions from realm: {} and client: portal-cli", realm);
     	  
-    	String clientSessionActive = "0";
-    	    	    	 
+    	List<UserSessionRepresentation> userSessionRepresentation = new ArrayList<UserSessionRepresentation>();
+    	
     	for (Map<String, String> clientSessionStat : KeycloakAdminApiConfig.getInstance().realm(realm).getClientSessionStats()) {
     		if (clientSessionStat.get("clientId").equals("portal-cli")) {
-    			clientSessionActive =clientSessionStat.get("active");
+    			userSessionRepresentation = KeycloakAdminApiConfig.getInstance().realm(realm).clients().get(clientSessionStat.get("id")).getUserSessions(0, 100);
     		}	
     	}
     	
-    	return clientSessionActive;
+    	return userSessionRepresentation;
     } 
 }

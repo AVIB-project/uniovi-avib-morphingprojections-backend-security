@@ -19,7 +19,8 @@
 	
 	<properties>
 		<java.version>17</java.version>
-		<keycloak.version>24.0.5</keycloak.version>
+		<keycloak.springboot.version>25.0.3</keycloak.springboot.version>
+		<keycloak.admin.client.version>25.0.5</keycloak.admin.client.version>
 		<springdoc>2.5.0</springdoc>
 	</properties>
 	
@@ -53,12 +54,12 @@
 		<dependency>
 		    <groupId>org.keycloak</groupId>
 		    <artifactId>keycloak-spring-boot-starter</artifactId>
-		    <version>${keycloak.version}</version>
+		    <version>${keycloak.springboot.version}</version>
 		</dependency>		
 		<dependency>
     		<groupId>org.keycloak</groupId>
     		<artifactId>keycloak-admin-client</artifactId>
-    		<version>${keycloak.version}</version>
+    		<version>${keycloak.admin.client.version}</version>
 		</dependency>		
 		<dependency>
 			<groupId>org.projectlombok</groupId>

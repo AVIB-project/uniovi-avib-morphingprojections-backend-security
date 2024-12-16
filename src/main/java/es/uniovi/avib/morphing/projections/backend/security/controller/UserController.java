@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.MappingsRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.keycloak.representations.idm.UserSessionRepresentation;
 
 import es.uniovi.avib.morphing.projections.backend.security.dto.LoginRequest;
 import es.uniovi.avib.morphing.projections.backend.security.dto.LoginResponse;
@@ -114,7 +115,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/realms/{realm}/sessions", method = RequestMethod.GET)
-	public String getUserSessions(@PathVariable("realm") String realm) throws Exception {
+	public List<UserSessionRepresentation> getUserSessions(@PathVariable("realm") String realm) throws Exception {
 		log.info("Executing getUserSessions from controller");
 		
 		return realmService.getClientUserSessions(realm);
