@@ -24,7 +24,7 @@ public class OpenAPIConfig {
 		prodServer.setDescription("Server URL in Production environment");
 
 		Contact contact = new Contact();
-		contact.setEmail("salinasmiguel@uniovi.es");
+		contact.setEmail("UO34525@uniovi.es");
 		contact.setName("Miguel Salinas Ganeco");
 		contact.setUrl("http://isa.uniovi.es/GSDPI/");
 

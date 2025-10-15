@@ -1,14 +1,8 @@
 server:
   port: 8085
 
-management:
-  endpoint:
-    health:
-      probes:
-        enabled: true
-
 keycloak:
-  server-url: http://localhost:8088
+  server-url: http://localhost:8088/auth
   admin-username: admin
   admin-password: password
   
@@ -16,18 +10,12 @@ keycloak:
 server:
   port: 8085
 
-management:
-  endpoint:
-    health:     
-      probes:
-        enabled: true
-
 spring:
   config:
     activate:
       on-profile: avib  
 
 keycloak:
-  server-url: http://gsdpi-keycloak:80
+  server-url: http://avib-keycloak:8080/auth
   admin-username: admin
   admin-password: password   

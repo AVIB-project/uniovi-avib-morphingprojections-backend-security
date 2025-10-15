@@ -10,7 +10,6 @@ WORKDIR /opt/app
 ARG ARG_SPRING_PROFILES_ACTIVE
 ENV SPRING_PROFILES_ACTIVE=$ARG_SPRING_PROFILES_ACTIVE
 
-# cp target/{jarfileName}.jar /opt/app/app.jar
 COPY ${JAR_FILE} app.jar
  
 EXPOSE 8085
